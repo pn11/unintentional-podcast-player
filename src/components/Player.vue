@@ -1,6 +1,6 @@
 <template>
   <div class="Player">
-    <h1>Unintended Podcast Player</h1>
+    <h1>Unintentional Podcast Player</h1>
     <button v-on:click="getRandomEpisode">Another episode</button><br><br>
     <audio controls
         preload="auto" width="100%" v-bind:type="audio_type" v-bind:src="audio_url">

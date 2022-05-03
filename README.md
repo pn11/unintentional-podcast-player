@@ -1,4 +1,4 @@
-# unintended-podcast-player
+# Unintentional Podcast Player
 
 ## Project setup
 
