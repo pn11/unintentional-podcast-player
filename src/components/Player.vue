@@ -1,5 +1,6 @@
 <template>
   <div class="Player">
+    <a href="https://github.com/pn11/unintentional-podcast-player"><img src="@/assets/GitHub-Mark-120px-plus.png" height="20"></a>
     <h1>Unintentional Podcast Player</h1>
     <button v-on:click="getRandomEpisode">Another episode</button><br><br>
     <audio controls
