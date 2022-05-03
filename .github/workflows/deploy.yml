@@ -1,0 +1,29 @@
+name: deploy github pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: install npm
+        run: |
+          sudo apt update
+          sudo apt install -y nodejs npm
+          sudo npm install n -g 
+          sudo n 14
+          sudo apt purge -y nodejs npm
+      - name: npm build
+        run: |
+          npm install
+          npm run build
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
