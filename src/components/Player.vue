@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import episodes_data from "@/assets/episodes.json";
+// import episodes_data from "@/assets/episodes.json";
 
 export default defineComponent({
   name: 'Player',
@@ -26,7 +26,7 @@ export default defineComponent({
   },
   data() {
     return {
-      episodes_data: episodes_data,
+      episodes_data: [],
       random_episode: null,
       show_title: '',
       episode_title: '',
@@ -38,11 +38,15 @@ export default defineComponent({
       imgWidth: "200"
     }
   },
+  async created() {
+    //const foobar = await this.latest();
+    this.episodes_data = require('@/assets/episodes.json');
+  },
   methods: {
     getRandomEpisode: function () {
       const array = this.episodes_data;
       this.random_episode = array[Math.floor(Math.random() * array.length)]
-    }
+    },
   },
   watch: {
     random_episode: function (ep){
