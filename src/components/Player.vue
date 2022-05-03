@@ -1,0 +1,61 @@
+<template>
+  <div class="Player">
+    <h1>Unintended Podcast Player</h1>
+    <button v-on:click="getRandomEpisode">Another episode</button><br><br>
+    <audio controls
+        preload="auto" width="100%" v-bind:type="audio_type" v-bind:src="audio_url">
+        <a v-bind:href="audio_url">{{audio_url}}</a>
+    </audio><br>
+    <h2>{{show_title}}</h2>
+    <img v-bind:width="imgWidth" v-bind:src="episode_art_url">
+    <h3>{{episode_title}}</h3>
+    <p v-html="episode_description_html"></p>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+import episodes_data from "@/assets/episodes.json";
+
+export default defineComponent({
+  name: 'Player',
+  components: {
+  },
+  computed: {
+  },
+  data() {
+    return {
+      episodes_data: episodes_data,
+      random_episode: null,
+      show_title: '',
+      episode_title: '',
+      episode_description: '',
+      episode_description_html: '',
+      episode_art_url: '',
+      audio_url: '',
+      audio_type: '',
+      imgWidth: "200"
+    }
+  },
+  methods: {
+    getRandomEpisode: function () {
+      const array = this.episodes_data;
+      this.random_episode = array[Math.floor(Math.random() * array.length)]
+    }
+  },
+  watch: {
+    random_episode: function (ep){
+      this.show_title = ep.show_title
+      this.episode_title = ep.title
+      this.episode_description = ep.description
+      this.episode_description_html = ep.description_html
+      this.episode_art_url = ep.episode_art_url
+      this.audio_url = ep.enclosures[0].url
+      this.audio_type = ep.enclosures[0].mime_type
+    }
+  },
+  beforeMount(){
+    this.getRandomEpisode()
+  },
+});
+</script>
