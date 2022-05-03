@@ -20,10 +20,14 @@ def main(args=None):
         try:
             parsed = podcastparser.parse(show['rss'], urllib.request.urlopen(show['rss'], timeout=5))
             show_title = parsed['title']
+            show_link = parsed.get('link', '')
+            show_cover_url = parsed.get('cover_url', '')
             for episode in parsed['episodes']:
                 episode['rss'] = show['rss']
                 episode['show_id'] = show['id']
                 episode['show_title'] = show_title
+                episode['show_link'] = show_link
+                episode['show_cover_url'] = show_cover_url
                 episodes.append(episode)
         except socket.timeout:
             print('Timeout.', show)

@@ -7,9 +7,10 @@
         preload="auto" width="100%" v-bind:type="audio_type" v-bind:src="audio_url">
         <a v-bind:href="audio_url">{{audio_url}}</a>
     </audio><br>
-    <h2>{{show_title}}</h2>
+    <h2><a v-bind:href="show_link">{{show_title}}</a></h2>
+    <img v-bind:width="imgWidth" v-bind:src="show_cover_url">
+    <h3><a v-bind:href="episode_link">{{episode_title}}</a></h3>
     <img v-bind:width="imgWidth" v-bind:src="episode_art_url">
-    <h3>{{episode_title}}</h3>
     <p v-html="episode_description_html"></p>
   </div>
 </template>
@@ -29,7 +30,10 @@ export default defineComponent({
       episodes_data: [],
       random_episode: null,
       show_title: '',
+      show_link: '',
+      show_cover_url: '',
       episode_title: '',
+      episode_link: '',
       episode_description: '',
       episode_description_html: '',
       episode_art_url: '',
@@ -51,7 +55,10 @@ export default defineComponent({
   watch: {
     random_episode: function (ep){
       this.show_title = ep.show_title
+      this.show_link = ep.show_link
+      this.show_cover_url = ep.show_cover_url
       this.episode_title = ep.title
+      this.episode_link = ep.link
       this.episode_description = ep.description
       this.episode_description_html = ep.description_html
       this.episode_art_url = ep.episode_art_url
